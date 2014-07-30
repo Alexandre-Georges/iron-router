@@ -281,13 +281,13 @@ this:
 
 ```html
 <!-- given a context of {_id: 1} this will render '/posts/1?sort_by=created_at' -->
-<a href="{{pathFor 'postShow' sort_by=created_at}}">Post Show</a>
+<a href="{{pathFor 'postShow' query='sort_by=created_at'}}">Post Show</a>
 ```
 And you can pass a hash value using the Handlbars helper like this:
 
 ```html
 <!-- given a context of {_id: 1} this will render '/posts/1?sort_by=created_at#someAnchorTag' -->
-<a href="{{pathFor 'postShow' sort_by=created_at hash=someAnchorTag}}">Post Show</a>
+<a href="{{pathFor 'postShow' query='sort_by=created_at' hash='someAnchorTag'}}">Post Show</a>
 ```
 
 ### Changing routes programmatically
@@ -509,10 +509,15 @@ Router.map(function () {
 
 If your data value or function returns null or undefined, the Router can
 automatically render a not found template. This is useful if you want to render
-a not found template for data that doesn't exist. The only thing you need to do
-is provide a `notFoundTemplate` option to your route.
+a not found template for data that doesn't exist. You need to do two things - 
+  1. Provide a `notFoundTemplate` option to your route.
+  2. Turn the `dataNotFound` hook on 
 
 ```javascript
+if (Meteor.isClient) {
+  Router.onBeforeAction('dataNotFound');
+}
+
 Router.map(function () {
   this.route('home', {
     path: '/',
@@ -672,7 +677,6 @@ Router.map(function () {
       //  this.params
       //  this.wait
       //  this.render
-      //  this.stop
       //  this.redirect
     }
   });
@@ -726,13 +730,13 @@ Router.map(function () {
   this.route('postShow', {
     path: '/posts/:_id',
 
-    onBeforeAction: function () {
+    onBeforeAction: function (pause) {
       if (!Meteor.user()) {
         // render the login template but keep the url in the browser the same
         this.render('login');
 
-        // stop the rest of the before hooks and the action function 
-        this.stop();
+        // pause this rendering of the rest of the before hooks and the action function 
+        pause();
       }
     },
 

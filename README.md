@@ -1,11 +1,11 @@
-# Iron Router [![Build Status](https://travis-ci.org/EventedMind/iron-router.png)](https://travis-ci.org/EventedMind/iron-router)
+# Iron Router 
 
 A client and server side router designed specifically for Meteor.
 
 
 ## History
 
-**Latest Version:** 0.7.1
+**Latest Version:** 0.8.1
 
 See the [History.md](History.md) file for changes (including breaking changes) across
 versions.
@@ -37,7 +37,7 @@ You place your route declarations in a `Router.map` block:
 
 ```javascript
 Router.map(function() {
-  this.route('home', {path: '/'})
+  this.route('home', {path: '/'});
   this.route('about');
 });
 ```
@@ -206,7 +206,7 @@ We've mentioned that `this` in route callbacks is a *Route Controller*. Explicit
 
 ```javascript
 AdminController = RouteController.extend({
-  before: // a user filter to control access?
+  onBeforeAction: // a user filter to control access?
 });
 
 PostsEditController = AdminController.extend({
@@ -245,6 +245,9 @@ contributing to improved design or adding features. Some guidelines below:
   around the bug. Pasting in a snippet of JavaScript probably won't be enough.
 
 * **Answer Questions!**: If you can help another user please do!
+
+How to create a reproduction:
+https://www.eventedmind.com/feed/github-issues-and-reproductions
 
 #### Local installation
 

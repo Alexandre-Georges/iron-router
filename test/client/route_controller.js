@@ -146,79 +146,64 @@ Tinytest.add('Client RouteController - _run then stop', function (test) {
 });
 
 Tinytest.add('Client RouteController - _run computation isolation', function (test) {
-  var calls = {};
-  var totalCalls = 0;
-  var logCall = function (name) {
-    totalCalls++;
-    calls[name] = calls[name] || 0;
-    calls[name]++;
-  };
+});
 
-  var deps = {};
-  _.each(['onRun', 'waitOn', 'data', 'action', 'onStop'], function (name) {
-    deps[name] = new Deps.Dependency;
-  });
-
+Tinytest.add('Client RouteController - data hook - with data', function (test) {
   var c = createController({
-    onRun: function () {
-      deps.onRun.depend();
-      logCall('onRun');
-    },
-
-    waitOn: function () {
-      deps.waitOn.depend();
-      logCall('waitOn');
-    },
-
-    data: function () {
-      deps.data.depend();
-      logCall('data');
-    },
-
-    onBeforeAction: function () {
-      logCall('onBeforeAction');
-    },
-
-    action: function () {
-      logCall('action');
-      deps.action.depend();
-    },
-
-    onAfterAction: function () {
-      logCall('onAfterAction');
-    }
+    template: 'one',
+    data: true,
+    onBeforeAction: 'dataNotFound',
+    notFoundTemplate: 'notFound'
   });
+  
+  var router = c.router;
 
+  var region;
+  router.setRegion = function (name, value) {
+    region = name || value;
+  };
+  
   c._run();
+  test.equal(region, 'one');
+});
 
-  // everything but onStop
-  test.equal(totalCalls, 6, 'first run');
+Tinytest.add('Client RouteController - data hook - with data returning false', function (test) {
+  var c = createController({
+    template: 'one',
+    data: false,
+    onBeforeAction: 'dataNotFound',
+    notFoundTemplate: 'notFound'
+  });
+  
+  var router = c.router;
 
-  // now invalidate the onRun dep
-  deps.onRun.changed();
-  Deps.flush();
-  test.equal(totalCalls, 7, 'only onRun should have rerun');
-  test.equal(calls.onRun, 2, 'onRun should rerun');
+  var region;
+  router.setRegion = function (name, value) {
+    region = name || value;
+  };
+  
+  c._run();
+  test.equal(region, 'notFound');
+});
 
-  // okay now the waitOn function!
-  deps.waitOn.changed();
-  Deps.flush();
-  test.equal(totalCalls, 8, 'only waitOn should have rerun');
-  test.equal(calls.waitOn, 2, 'waitOn should rerun');
+Tinytest.add('Client RouteController - data hook - with no data property', function (test) {
+  var c = createController({
+    template: 'one',
+    onBeforeAction: 'dataNotFound',
+    notFoundTemplate: 'notFound'
+  });
+  
+  var router = c.router;
 
-  // whoop whoop, now the data function!
-  deps.data.changed();
-  Deps.flush();
-  test.equal(totalCalls, 9, 'only data should have rerun');
-  test.equal(calls.data, 2, 'data should rerun');
+  var region;
+  router.setRegion = function (name, value) {
+    region = name || value;
+  };
+  
+  c._run();
+  test.equal(region, 'one');
 
-  // almost! now the action functions!
-  deps.action.changed();
-  Deps.flush();
-  // 9 to 12 is because action invalidtes
-  // onBeforeAction, action, onAfterAction
-  test.equal(totalCalls, 12, 'only action should have rerun');
-  test.equal(calls.action, 2, 'action should rerun');
-  test.equal(calls.onBeforeAction, 2, 'onBeforeAction should rerun');
-  test.equal(calls.onAfterAction, 2, 'onAfterAction should rerun');
+});
+
+Tinytest.add('Client RouteController - clearUnusedRegions is called', function (test) {
 });
