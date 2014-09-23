@@ -7,6 +7,10 @@ A client and server side router designed specifically for Meteor.
 
 **Latest Version:** 0.8.2
 
+**IMPORTANT:**
+*Do not install versions 0.9.0 or 0.9.1 from Atmosphere. These versions are intended for the new Meteor packaging system available in Meteor v0.9.0. iron-router 0.9.x was released by mistake to Atmosphere.*
+
+
 See the [History.md](History.md) file for changes (including breaking changes) across
 versions.
 
@@ -23,7 +27,7 @@ Iron Router works with Meteor 0.8.0 and above. To use an earlier version, use a 
 Iron Router can be installed with [Meteorite](https://github.com/oortcloud/meteorite/). From inside a Meteorite-managed app:
 
 ``` sh
-$ mrt add iron-router
+$ meteor add iron:router
 ```
 
 ## API
@@ -166,7 +170,6 @@ You can hook into the route run cycle via the following hooks:
  - `onRun` - this happens *once only* when the route is loaded. 
  
    NOTE: if the page hot code reloads, the onRun hook *will not re-run*. This makes it appropriate for things like analytics, or setting session variables and not for on-page setup.
- - `onData` - runs reactively whenever the data changes.
  - `onBeforeAction` - runs reactively before the action.
  - `onAfterAction` - likewise, after the action.
  - `onStop` - runs once when the controller is stopped, like just before a user routes away.

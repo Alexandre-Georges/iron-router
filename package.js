@@ -1,27 +1,28 @@
 Package.describe({
   summary: 'Routing specifically designed for Meteor',
-  version: '0.8.2'
+  version: '0.9.2-rc0',
+  git: 'https://github.com/eventedmind/iron-router'
 });
 
 Package.on_use(function (api) {
+  api.versionsFrom('METEOR@0.9.1-rc2');
+
   api.use('reactive-dict', ['client', 'server']);
   api.use('deps', ['client', 'server']);
   api.use('underscore', ['client', 'server']);
   api.use('ejson', ['client', 'server']);
   api.use('jquery', 'client');
-
-  // default ui manager
-  // use unordered: true becuase of circular dependency
+  api.use('webapp', 'server');
 
   // for helpers
-  api.use('ui', 'client');
+  api.use('blaze', 'client');
  
   // gives us dynamic layouts
-  api.use('iron-layout');
+  api.use('iron:layout@0.4.0-rc0');
 
-  // imply dynamic layouts as well so users can use them directly!
-  api.imply('iron-layout');
-
+  // in case they have the old version that was
+  // automigrated from atmosphere.
+  api.use('cmather:iron-router@0.8.2', {weak: true});
 
   api.add_files('lib/utils.js', ['client', 'server']);
   api.add_files('lib/route.js', ['client', 'server']);
@@ -39,7 +40,8 @@ Package.on_use(function (api) {
   api.add_files('lib/server/route_controller.js', 'server');
   api.add_files('lib/server/router.js', 'server');
 
-  api.use('webapp', 'server');
+  api.add_files('lib/version_conflict_error.js');
+
   Npm.depends({connect: '2.9.0'});
 
   api.export('RouteController', ['client', 'server']);
@@ -53,10 +55,13 @@ Package.on_use(function (api) {
 });
 
 Package.on_test(function (api) {
-  api.use('iron-router', ['client', 'server']);
+  api.versionsFrom('METEOR@0.9.1-rc1');
+
+  api.use('iron:router', ['client', 'server']);
   api.use('tinytest', ['client', 'server']);
   api.use('test-helpers', ['client', 'server']);
   api.use('reactive-dict', ['client', 'server']);
+  api.use('underscore');
 
   api.add_files('test/test_helpers.js', ['client', 'server']);
 

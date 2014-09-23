@@ -1,4 +1,27 @@
-v0.8.1 / 2014-07-29
+v0.9.2 / 2014-08-27
+==================
+  * Bump iron:dynamic-template and iron:layout dependencies for Meteor 0.9.1 release
+  * Fix #742 - https://github.com/EventedMind/iron-router/commit/69222246194fb630996fdb988335fed208e4caf4#commitcomment-7468636
+  * Added another failing test case. For #742
+  * Update README.md
+  * fix waitlist onInvalidate logic
+  * fix package.js to use METEOR vs METEOR-CORE in versionsFrom
+
+v0.9.1 / 2014-08-18
+=================
+  * Fix waitlist to ensure ready() is correct before next flush
+  * Throw error on infinite invalidation loops for waitlist
+  * Fix multiple data issues
+  * Make onRun only run once
+
+v0.9.0 / 2014-08-12
+==================
+  * update for new package system
+  * throw error for cmather:iron-router and use iron:router instead
+  * remove deprecate method from utils since we have it in core
+
+v0.8.2 / 2014-07-29
+==================
   * fix subscribe(...).wait() bug
 
 v0.8.0 / 2014-07-29
