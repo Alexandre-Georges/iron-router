@@ -2,7 +2,7 @@
   "dependencies": [
     [
       "application-configuration",
-      "1.0.0"
+      "1.0.1-rc0"
     ],
     [
       "binary-heap",
@@ -10,7 +10,7 @@
     ],
     [
       "blaze",
-      "2.0.0-rc0"
+      "2.0.0"
     ],
     [
       "blaze-tools",
@@ -25,12 +25,16 @@
       "1.0.0"
     ],
     [
+      "ddp",
+      "1.0.8-rc0"
+    ],
+    [
       "deps",
-      "1.0.2-rc1"
+      "1.0.2"
     ],
     [
       "ejson",
-      "1.0.1-rc0"
+      "1.0.1"
     ],
     [
       "follower-livedata",
@@ -46,7 +50,7 @@
     ],
     [
       "htmljs",
-      "1.0.0"
+      "1.0.0-cordova1"
     ],
     [
       "id-map",
@@ -54,15 +58,15 @@
     ],
     [
       "iron:core",
-      "0.3.2"
+      "0.3.4"
     ],
     [
       "iron:dynamic-template",
-      "0.4.0-rc0"
+      "0.4.1"
     ],
     [
       "iron:layout",
-      "0.4.0-rc0"
+      "0.4.1"
     ],
     [
       "jquery",
@@ -74,15 +78,15 @@
     ],
     [
       "livedata",
-      "1.0.8-rc0"
+      "1.0.8"
     ],
     [
       "logging",
-      "1.0.2"
+      "1.0.2-cordova1"
     ],
     [
       "meteor",
-      "1.0.3-rc0"
+      "1.0.0"
     ],
     [
       "minifiers",
@@ -93,7 +97,7 @@
       "1.0.2-rc0"
     ],
     [
-      "mongo-livedata",
+      "mongo",
       "1.0.4-rc0"
     ],
     [
@@ -110,7 +114,7 @@
     ],
     [
       "reactive-dict",
-      "1.0.1-rc0"
+      "1.0.1"
     ],
     [
       "reactive-var",
@@ -122,7 +126,7 @@
     ],
     [
       "routepolicy",
-      "1.0.0"
+      "1.0.0-cordova1"
     ],
     [
       "spacebars",
@@ -130,15 +134,23 @@
     ],
     [
       "spacebars-compiler",
-      "1.0.2-rc0"
+      "1.0.2"
     ],
     [
       "templating",
-      "1.0.5-rc0"
+      "1.0.5"
     ],
     [
       "tracker",
+<<<<<<< HEAD
       "1.0.2-rc1"
+=======
+      "1.0.2-rc0"
+    ],
+    [
+      "ui",
+      "1.0.1"
+>>>>>>> upstream/devel
     ],
     [
       "underscore",
@@ -146,10 +158,10 @@
     ],
     [
       "webapp",
-      "1.0.3-rc0"
+      "1.0.3"
     ]
   ],
   "pluginDependencies": [],
-  "toolVersion": "meteor-tool@CHECKOUT",
+  "toolVersion": "meteor-tool@1.0.27",
   "format": "1.0"
 }

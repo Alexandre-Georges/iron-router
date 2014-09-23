@@ -1,11 +1,11 @@
 Package.describe({
-  summary: 'Routing specifically designed for Meteor',
-  version: '0.9.2-rc0',
-  git: 'https://github.com/eventedmind/iron-router'
+  summary: 'Iron router with IE9 support',
+  version: '0.9.3',
+  git: 'https://github.com/Alexandre-Georges/iron-router'
 });
 
 Package.on_use(function (api) {
-  api.versionsFrom('METEOR@0.9.1-rc2');
+  api.versionsFrom('METEOR@0.9.1');
 
   api.use('reactive-dict', ['client', 'server']);
   api.use('deps', ['client', 'server']);
@@ -16,9 +16,9 @@ Package.on_use(function (api) {
 
   // for helpers
   api.use('blaze', 'client');
- 
+
   // gives us dynamic layouts
-  api.use('iron:layout@0.4.0-rc0');
+  api.use('iron:layout@0.4.1');
 
   // in case they have the old version that was
   // automigrated from atmosphere.
@@ -55,7 +55,7 @@ Package.on_use(function (api) {
 });
 
 Package.on_test(function (api) {
-  api.versionsFrom('METEOR@0.9.1-rc1');
+  api.versionsFrom('METEOR@0.9.1');
 
   api.use('iron:router', ['client', 'server']);
   api.use('tinytest', ['client', 'server']);
